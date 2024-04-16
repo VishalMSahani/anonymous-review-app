@@ -31,3 +31,4 @@ async function dbConnect():Promise<void> {
     }
     
 }
+export {dbConnect}

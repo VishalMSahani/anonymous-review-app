@@ -1,22 +1,22 @@
 'use client'
-import { useSession, signIn, signOut } from "next-auth/react"
+import { zodResolver } from '@hookform/resolvers/zod'
+import {useForm } from 'react-hook-form'
+import * as z from 'zod'
+import Link from 'next/link'
+import { useState } from 'react'
 
-export default function Component() {
-  const { data: session } = useSession()
-  if (session) {
-    return (
-      <>
-        Signed in as {session.user.email} <br />
-        <button 
-        onClick={() => signOut()}>Sign out</button>
-      </>
-    )
-  }
+
+
+const page = ()=> {
+
+    const [username, setUsername] = useState("");
+    const [usernameMessage, setUsernameMessage] = useState("")
+    const [isCheckingUsername, setIsCheckingUsername] = useState(false)
+    const [isSubmetting, setIsSubmetting] = useState(false)
+
   return (
-    <>
-      Not signed in <br />
-      <button className="px-3 py-2 rounded-lg bg-white text-black"
-      onClick={() => signIn()}>Sign in</button>
-    </>
+    <div> Page</div>
   )
 }
+
+export default page

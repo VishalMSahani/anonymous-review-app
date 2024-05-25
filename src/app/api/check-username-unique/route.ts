@@ -20,6 +20,7 @@ export async function GET(request:Request) {
 
         if (!result.success) {
             const usernameError = result.error.format().username?._errors || []
+            console.log(usernameError)
             return Response.json(
                 {
                     success: false,
@@ -44,14 +45,14 @@ export async function GET(request:Request) {
         return Response.json(
             {
                 success: true,
-                message:"Username exists"
+                message:"Username is unique"
             },{status:400}   
         )
 
 
 
     } catch (error) {
-        console.error("Error Checking username", error)
+        console.error("Error Checking username")
         return Response.json(
             {
                 success:false,

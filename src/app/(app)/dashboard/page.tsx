@@ -60,7 +60,7 @@ const Dashboard = () => {
         setIsSwitchoading(false);
 
         try {
-            const response = await axios.get('/api/get-messages');
+            const response = await axios.get<ApiResponse>('/api/get-messages');
             setMessages(response.data.messages || [])
             if (refresh) {
                 toast({

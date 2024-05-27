@@ -9,7 +9,7 @@ export async function POST(request:Request) {
 
     try {
      
-        const user = await UserModel.findById(username)
+        const user = await UserModel.findOne({ username: username })
 
         if (!user) {
             return Response.json(
@@ -34,6 +34,7 @@ export async function POST(request:Request) {
         user.messages.push(newMessage as Message)
         await user.save()
 
+        console.log(newMessage)
         return Response.json(
             {
                 success:true,

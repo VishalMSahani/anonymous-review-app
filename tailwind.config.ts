@@ -52,6 +52,23 @@ const config = {
           DEFAULT: "hsl(var(--card))",
           foreground: "hsl(var(--card-foreground))",
         },
+        "sky-blue": "#00b4c5",
+        "darker-sky-blue": "#0099a7",
+        "medium-blue": "#0073e6",
+        "darker-medium-blue": "#005bb3",
+        "royal-blue": "#2546f0",
+        "darker-royal-blue": "#1f3bcd",
+        "purple": "#5928ed",
+        "darker-purple": "#4b22c6",
+        "turquoise": "#00bf7d",
+        "darker-turquoise": "#009966",
+        'gray-800': '#333333',  // Dark gray suitable for main text
+        'gray-700': '#4d4d4d',  // Slightly lighter gray for secondary text
+        'gray-600': '#666666',
+        "light-green": "#cfebb6",
+        "lighter-green-1": "#d8f0c4",
+        "lighter-green-2": "#e1f5d2",
+        "lighter-green-3": "#eafae0"
       },
       borderRadius: {
         lg: "var(--radius)",
@@ -72,6 +89,7 @@ const config = {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
       },
+    
     },
   },
   plugins: [require("tailwindcss-animate")],

@@ -20,7 +20,8 @@ import { Form,
 import { Input } from '@/components/ui/input'
 import { Button } from '@/components/ui/button'
 import { Loader2 } from 'lucide-react'
-
+import SignupImg from '../../../assets/Sign up-amico.svg'
+import Image from 'next/image'
 
 
 
@@ -92,8 +93,14 @@ const Page = ()=> {
     }
 
   return (
-    <div className=' flex justify-center items-center '> 
-      <div className=''>
+    <div className=' flex justify-center items-center flex-col bg-lighter-green-1 h-full lg:flex-row lg:px-40'> 
+      <div className='my-8 text-center text-gray-700 flex flex-col justify-center items-center w-full lg:mt-8'>
+        <p className='text-3xl font-bold my-3 text-darker-turquoise'>Join True Feedback Today!</p>
+        <p className='text-[25px] font-semibold'>Create Your Account</p>
+        <p className='text-[15px] mb-5'>Sign up to start receiving feedback and insights.</p>
+        <Image src={SignupImg} alt='sign-up-Img' width={300}/>
+      </div>
+      <div className='lg:w-full'>
         <Form {...form}>
 
         <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
@@ -104,7 +111,7 @@ const Page = ()=> {
             <FormItem>
               <FormLabel>Username</FormLabel>
               <FormControl>
-                <Input placeholder="username" 
+                <Input placeholder=" Please enter username" className='bg-lighter-green-0'
                 {...field}
                 onChange={(e)=>{
                   field.onChange(e)
@@ -130,7 +137,7 @@ const Page = ()=> {
             <FormItem>
               <FormLabel>Email</FormLabel>
               <FormControl>
-                <Input placeholder="email" 
+                <Input placeholder="Please enter email" className='bg-lighter-green-0'
                 {...field}
                  />
               </FormControl>
@@ -146,7 +153,7 @@ const Page = ()=> {
             <FormItem>
               <FormLabel>password</FormLabel>
               <FormControl>
-                <Input type='password' placeholder="password" 
+                <Input type='password' placeholder="password" className='bg-lighter-green-0'
                 {...field}
                  />
               </FormControl>
@@ -155,7 +162,8 @@ const Page = ()=> {
           )}
         />
 
-          <Button type='submit' disabled={isSubmetting}>
+          <Button type='submit' disabled={isSubmetting} 
+          className='w-full bg-darker-turquoise hover:bg-turquoise'>
             {
               isSubmetting ? (
                 <>
@@ -166,14 +174,19 @@ const Page = ()=> {
           </Button>
       </form>
         </Form>
-        <div>
-          <p>
-            have account ?
-
-            <Link href="sign-in" >
-            Sign-in</Link>
+        <div className='mt-4'>
+          <p className='text-sm text-center mb-2 text-gray-700'>
+          Already have an account?
           </p>
+            <Link href="sign-in" >
+            <Button type='submit' 
+            className='w-full bg-transparent hover:bg-lighter-green-2 border
+             border-darker-turquoise mb-24 text-gray-800'>
+            Sign-in
+          </Button>
+            </Link>
         </div>
+
       </div>
     </div>
   ) 

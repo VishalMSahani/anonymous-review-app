@@ -15,10 +15,10 @@ const HeroSection = () => {
     const user:User = session?.user as User
 
   return (
-    <div className='w-full h-screen bg-lighter-green-3 text-gray-800'>
+    <div className='w-full h-full bg-lighter-green-3 text-gray-800'>
       <div className='flex flex-col justify-center '>
-        <div className='flex justify-evenly items-center'>
-            <div className='mt-20 '>
+        <div className='flex lg:flex-row max-sm:flex-col justify-evenly  items-center'>
+            <div className='mt-20 max-sm:text-center '>
                 {
                     session ? (
                         <p className=''>Hello, <span className='font-semibold '>{user?.username} </span> welcome to</p>
@@ -27,7 +27,7 @@ const HeroSection = () => {
                     )
                 }
                 <h1 className='text-5xl font-bold mt-4' >True Feedback</h1>
-                <h1 className='text-lg' >Honest and Anonymous Communication, Simplified</h1>
+                <h1 className='text-lg max-sm:text-wrap max-sm:m-2 ' >Honest and Anonymous Communication, Simplified</h1>
             </div>
             <Image className='mt-24'
             src={HeroGifgreen} alt='hero-gif' width={350} loading='lazy'/>

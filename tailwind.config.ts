@@ -66,9 +66,11 @@ const config = {
         'gray-700': '#4d4d4d',  // Slightly lighter gray for secondary text
         'gray-600': '#666666',
         "light-green": "#cfebb6",
+        "lighter-green-0": "#f3fde7",
         "lighter-green-1": "#d8f0c4",
         "lighter-green-2": "#e1f5d2",
-        "lighter-green-3": "#eafae0"
+        "lighter-green-3": "#eafae0",
+        "lighter-green-4": "#c2e4a6"
       },
       borderRadius: {
         lg: "var(--radius)",

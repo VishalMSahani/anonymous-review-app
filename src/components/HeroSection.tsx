@@ -56,10 +56,10 @@ const HeroSection = () => {
                 (
                     <div className='flex flex-col justify-center items-center mt-8 gap-4'>
                         <div className='text-center gap-4'>
-                            <p className='text-2xl font-semibold mb-4'>
+                            <p className='text-3xl font-semibold mb-4'>
                             Get Started Today!
                             </p>
-                            <p className='max-w-[900px] text-s font-light'>
+                            <p className='max-w-[900px] text-s font-light text-sm m-3'>
                             Empower yourself with candid feedback and genuine messages. With True Feedback, generate a unique link, 
                             share it with anyone, and receive honest, anonymous responses without revealing your identity.
                             </p>

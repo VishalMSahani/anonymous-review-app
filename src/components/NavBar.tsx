@@ -16,7 +16,7 @@ const NavBar = () => {
   return (
    <nav>
         <div className='flex  justify-evenly items-center bg-white'>
-            <a href="#">
+            <a href="/">
                 <Image src={logo} alt='logo-trueFeedback' width={150} height={50} />   
             </a>
             {

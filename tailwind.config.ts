@@ -70,7 +70,13 @@ const config = {
         "lighter-green-1": "#d8f0c4",
         "lighter-green-2": "#e1f5d2",
         "lighter-green-3": "#eafae0",
-        "lighter-green-4": "#c2e4a6"
+        "lighter-green-4": "#c2e4a6",
+        "lighter-purple-0": "#f3e7fd",
+        "lighter-purple-1": "#d8c4f0",
+        "lighter-purple-2": "#e1d2f5",
+        "lighter-purple-3": "#eae0fa",
+        "lighter-purple-4": "#c2a6e4"
+
       },
       borderRadius: {
         lg: "var(--radius)",

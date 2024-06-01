@@ -2,9 +2,7 @@
 import React from 'react'
 import {
     Card,
-    CardContent,
     CardDescription,
-    CardFooter,
     CardHeader,
     CardTitle,
   } from "@/components/ui/card"
@@ -20,12 +18,13 @@ import {
     AlertDialogTrigger,
     } from "@/components/ui/alert-dialog"
 import { Button } from './ui/button'
-import { X } from 'lucide-react'
+import { DeleteIcon } from 'lucide-react'
 import { Message } from '@/models/User'
 import axios, { AxiosError } from 'axios'
 import { useToast } from './ui/use-toast'
 import dayjs from 'dayjs'
 import { ApiResponse } from '@/types/ApiResponse'
+
 
 
 type MessageCardProps ={
@@ -54,13 +53,15 @@ const MessageCard = ({message , onMessageDelete}:MessageCardProps) => {
         }
     }
   return (
-    <div>
-        <Card>
+    <div className=''>
+        <Card className='card-bordered'>
             <CardHeader>
-                <CardTitle>{message.content}</CardTitle>
+                <div className='flex justify-between items-center'>
+                <CardTitle className='text-lg font-semibold'
+                >{message.content}</CardTitle>
                 <AlertDialog>
-                    <AlertDialogTrigger asChild>
-                        <Button variant="destructive"><X className='w-5 h-5'/></Button>
+                    <AlertDialogTrigger asChild className=''>
+                        <Button variant="destructive" className='px-2 py-1'><DeleteIcon className='w-5 h-5'/></Button>
                     </AlertDialogTrigger>
                     <AlertDialogContent>
                         <AlertDialogHeader>
@@ -76,7 +77,8 @@ const MessageCard = ({message , onMessageDelete}:MessageCardProps) => {
                         </AlertDialogFooter>
                     </AlertDialogContent>
                     </AlertDialog>
-                <CardDescription>
+                </div>
+                <CardDescription className='text-sm text-gray-500'>
                     {dayjs(message.createdAt).format('MMM D, YYYY h:mm A')}
                 </CardDescription>
             </CardHeader>

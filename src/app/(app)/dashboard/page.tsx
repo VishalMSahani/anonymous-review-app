@@ -15,12 +15,15 @@ import { useSession } from 'next-auth/react';
 import React, { useCallback, useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form';
 import Link from 'next/link';
+import DashBoardImg from '../../../assets/Analyze-pana.svg'
+import Image from 'next/image';
 
 const Dashboard = () => {
 
     const [messages, setMessages] = useState<Message[]>([]);
     const [isLoading, setIsLoading] = useState(false)
-    const [isSwitchoading, setIsSwitchoading] = useState(false)
+    const [isSwitchoading, setIsSwitchoading] = useState(false);
+    const [buttonText, setButtonText] = useState('Copy');
     const {toast} = useToast()
 
     const handleMessageDelete = (messageId:string) => {
@@ -87,11 +90,11 @@ const Dashboard = () => {
 
     // fetch initial state from the server
 
-    useEffect(()=>{
-      if (!session || !session.user) return;
-        fetchMessages();
-        fetchAcceptMessage();
-    },[session, setValue, toast, fetchMessages, fetchAcceptMessage]);
+    // useEffect(()=>{
+    //   if (!session || !session.user) return;
+    //     fetchMessages();
+    //     fetchAcceptMessage();
+    // },[session, setValue, toast, fetchMessages, fetchAcceptMessage]);
 
     const handleSwitchChange = async() => {
         try {
@@ -126,46 +129,80 @@ const Dashboard = () => {
     const baseURL = `${window.location.protocol}//${window.location.host}`
     const profileURL = `${baseURL}/user-client/${username}`
 
-    const coypToClipboard = () =>{
-        navigator.clipboard.writeText(profileURL);
-        toast({
-            title: 'URL Copied!',
-            description: 'Profile URL has been copied to clipboard.',
+    const copyToClipboard = () => {
+      if (!navigator.clipboard) {
+          console.error('Clipboard API not available');
+          toast({
+              title: 'Copy Failed',
+              description: 'Clipboard API not available.',
+              variant: 'destructive'
           });
-    }
+          return;
+      }
+  
+      navigator.clipboard.writeText(profileURL).then(() => {
+          toast({
+              title: 'URL Copied!',
+              description: 'Profile URL has been copied to clipboard.',
+          });
+          setButtonText('Copied!');
+          setTimeout(() => setButtonText('Copy'), 2000);
+      }).catch(err => {
+          console.error('Failed to copy: ', err);
+          toast({
+              title: 'Copy Failed',
+              description: 'Failed to copy profile URL to clipboard.',
+              variant: 'destructive'
+          });
+      });
+  }
 
   return (
-    <div className="my-8 mx-4 md:mx-8 lg:mx-auto p-6 bg-white rounded w-full max-w-6xl">
-    <h1 className="text-4xl font-bold mb-4">User Dashboard</h1>
+    <div className='bg-lighter-green-0 min-h-screen max-h-full w-full'>
+    <div className="my-8 md:mx-8 lg:mx-auto p-6 bg-lighter-green-0 rounded w-full max-w-6xl 
+                    min-h-screen max-h-full mt-3">
+      <div className='flex lg:items-center justify-between max-md:flex-col '>
+        <div>
+          <p className='text-2xl font-semibold text-gray-600'>Hello, <span className='italic'>{username} </span></p>
+          <p className='text-sm text-gray-500'>Welcome to </p>
+          <h1 className="text-4xl font-bold mb-4 mt-3 text-darker-turquoise">User Dashboard</h1>
+        </div>
+        <Image src={DashBoardImg} alt='DashBoardImage' width={350} className='lg:mr-24 max-md:ml-5'/>
+      </div>
 
-    <div className="mb-4">
-      <h2 className="text-lg font-semibold mb-2">Copy Your Unique Link</h2>{' '}
+    <div className="mb-4 bg-lighter-green-1 p-5 rounded-lg">
+      <h2 className="text-lg font-semibold mb-1 text-gray-700">Copy Your Unique Link</h2>{' '}
+      <p className='mb-3 text-sm'>Share this link to recive messages </p>
       <div className="flex items-center">
         <input
           type="text"
           value={profileURL}
           disabled
-          className="input input-bordered w-full p-2 mr-2"
+          className={`w-full p-2 mr-2 bg-gray-100 rounded-md 
+          ${buttonText === "Copied!" ? "bg-lighter-green-4": null}`}
         />
-        <Button onClick={coypToClipboard}>Copy</Button>
+        <Button type='submit' onClick={copyToClipboard}>
+          {buttonText}
+        </Button>
       </div>
     </div>
 
-    <div className="mb-4">
+    <div className="mb-4 flex items-center ">
         <Switch
           {...register('acceptMessages')}
           checked={acceptMessages}
           onCheckedChange={handleSwitchChange}
           disabled={isSwitchoading}
         />
-        <span className="ml-2">
+        <span className="ml-2 ">
           Accept Messages: {acceptMessages ? 'On' : 'Off'}
         </span>
       </div>
       <Separator />
 
       <Button
-        className="mt-4"
+
+        className="mt-4 bg-turquoise hover:bg-darker-turquoise hover:text-white"
         variant="outline"
         onClick={(e) => {
           e.preventDefault();
@@ -173,11 +210,17 @@ const Dashboard = () => {
         }}
       >
         {isLoading ? (
-          <Loader2 className="h-4 w-4 animate-spin" />
+          <Loader2 className="h-4 w-4 animate-spin text-white" />
 
         ) : (
-          <RefreshCcw className="h-4 w-4" />
-        )}
+          <RefreshCcw className="h-4 w-4 text-white" />
+        )} 
+        <p className='ml-3'> 
+        <span>
+          {
+            isLoading ? "Refreshing" : "Refresh" 
+          }
+          </span> Messages</p>
       </Button>
       <div className="mt-4 grid grid-cols-1 md:grid-cols-2 gap-6">
         {messages.length > 0 ? (
@@ -189,9 +232,10 @@ const Dashboard = () => {
             />
           ))
         ) : (
-          <p>No messages to display.</p>
+          <p> No messages to display.</p>
         )}
       </div>
+    </div>
     </div>
   )
 }   

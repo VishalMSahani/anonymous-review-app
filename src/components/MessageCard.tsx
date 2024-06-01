@@ -22,9 +22,10 @@ import {
 import { Button } from './ui/button'
 import { X } from 'lucide-react'
 import { Message } from '@/models/User'
-import axios from 'axios'
+import axios, { AxiosError } from 'axios'
 import { useToast } from './ui/use-toast'
 import dayjs from 'dayjs'
+import { ApiResponse } from '@/types/ApiResponse'
 
 
 type MessageCardProps ={
@@ -37,11 +38,20 @@ const MessageCard = ({message , onMessageDelete}:MessageCardProps) => {
     const {toast} = useToast()
     
     const hendelDeleteConfirm = async() =>{
-        const response = await axios.delete(`api/delete-message${message._id}`)
-        toast({
-            title:response.data.message
-        })
-        onMessageDelete(message._id)
+        try {
+            const response = await axios.delete<ApiResponse>(`/api/delete-message/ ${message._id}`)
+            toast({
+                title:response.data.message
+            })
+            onMessageDelete(message._id)
+        } catch (error) {
+            const axiosError = error as AxiosError<ApiResponse>;
+            toast({
+                title:'error',
+                description: axiosError.response?.data.message ?? 'failed to delete message',
+                variant: 'destructive'
+            })
+        }
     }
   return (
     <div>
@@ -57,7 +67,7 @@ const MessageCard = ({message , onMessageDelete}:MessageCardProps) => {
                         <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
                         <AlertDialogDescription>
                             This action cannot be undone. This will permanently delete your
-                            account and remove your data from our servers.
+                            <span className='font-semibold italic'> Message </span> 
                         </AlertDialogDescription>
                         </AlertDialogHeader>
                         <AlertDialogFooter>

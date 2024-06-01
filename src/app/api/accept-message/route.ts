@@ -1,6 +1,6 @@
 import { dbConnect } from "@/lib/dbConnect";
 import UserModel from "@/models/User";
-import { getServerSession } from "next-auth";
+import { getServerSession } from "next-auth/next";
 import { authOption } from "../auth/[...nextauth]/options";
 import {User} from "next-auth"
 
@@ -91,7 +91,7 @@ export async function GET(request:Request) {
             {
                 success:true,
                 message:"user found",
-                isAcceptingMessages: foundUser.isAcceptingMessage
+                isAcceptingMessages: foundUser.isAcceptingMessages
             },{status:200}
         ) 
      

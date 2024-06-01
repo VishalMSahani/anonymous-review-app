@@ -14,6 +14,7 @@ import { User } from 'next-auth';
 import { useSession } from 'next-auth/react';
 import React, { useCallback, useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form';
+import Link from 'next/link';
 
 const Dashboard = () => {
 
@@ -39,7 +40,7 @@ const Dashboard = () => {
         setIsSwitchoading(true)
         try {
             const response = await axios.get<ApiResponse>('api/accept-message');
-            setValue('acceptMessages', response.data.isAcceptingMessage);
+            setValue('acceptMessages', response.data.isAcceptingMessages);
         } catch (error) {
             const axiosError = error as AxiosError<ApiResponse>;
             toast({
@@ -87,6 +88,7 @@ const Dashboard = () => {
     // fetch initial state from the server
 
     useEffect(()=>{
+      if (!session || !session.user) return;
         fetchMessages();
         fetchAcceptMessage();
     },[session, setValue, toast, fetchMessages, fetchAcceptMessage]);
@@ -115,7 +117,8 @@ const Dashboard = () => {
     } 
     
     if (!session || !session.user) {
-        return <div></div>
+        return 
+          
     };
 
     const {username} = session.user as User;

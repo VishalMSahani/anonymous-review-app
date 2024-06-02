@@ -15,32 +15,35 @@ const NavBar = () => {
 
   return (
    <nav>
-        <div className='flex  justify-evenly items-center bg-white'>
+        <div className='flex justify-between lg:mx-24 mx-6 items-center bg-white'>
             <a href="/">
                 <Image src={logo} alt='logo-trueFeedback' width={150} height={50} />   
             </a>
             {
                 session? (
-                    <>
-                    <span>
-                        Welcome, {user?.username}
-                    </span>
-                    <Button onClick={()=>signOut()}>
+                    <div className='space-x-4'>
+                    <Link href='/dashboard'>
+                        <Button className='bg-turquoise hover:bg-darker-turquoise text-black'>
+                            Dashboard
+                        </Button>
+                   </Link>
+                    <Button className='bg-transparent border text-red-500 border-red-500 hover:bg-lighter-green-2'
+                    onClick={()=>signOut()}>
                     Logout
                    </Button>
-                    </>
+                    </div>
                 ) : 
                 (
                   <div className=''>
-                     <Link href='/sign-in' className='mr-4'>
-                    <Button className='bg-transparent border text-black border-turquoise hover:bg-lighter-green-2'>
-                        Login
-                    </Button>
-                   </Link> 
-                     <Link href='/sign-up'>
-                    <Button className='bg-turquoise hover:bg-darker-turquoise text-black'>
-                        Sign-up
-                    </Button>
+                    <Link href='/sign-in' className='mr-4'>
+                        <Button className='bg-transparent border text-black border-turquoise hover:bg-lighter-green-2'>
+                            Login
+                        </Button>
+                    </Link> 
+                    <Link href='/sign-up'>
+                        <Button className='bg-turquoise hover:bg-darker-turquoise text-black'>
+                            Sign-up
+                        </Button>
                    </Link> 
                   </div>   
                 )

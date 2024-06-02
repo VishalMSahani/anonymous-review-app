@@ -23,6 +23,9 @@ import { Loader2 } from 'lucide-react';
 import { Textarea } from "@/components/ui/textarea"
 import Link from 'next/link';
 import { useCompletion } from 'ai/react';
+import Image from 'next/image';
+import logo from '../../../assets/Logo-true-feedback.svg'
+import darkImg from '../../../assets/Email campaign-pana dark.svg'
 
 
 const parseStringMessages = (messageString:string):string[]=>{
@@ -90,18 +93,28 @@ const SendMessage = () => {
     
 
   return (
-    <div className="container mx-auto my-8 p-6 bg-white rounded max-w-4xl">
-      <h1 className="text-4xl font-bold mb-6 text-center">
-        Public Profile Link
-      </h1>
+    <div className='bg-lighter-green-0 w-full min-h-screen max-h-full'>
+    <div className="container mx-auto py-8 p-6 bg-lighter-green-0 rounded max-w-4xl min-h-screen">
+      <div className='flex flex-col lg:flex-row items-center lg:justify-evenly '>
+        <div className='flex flex-col items-center '>
+            <p className='text-center text-lg'>Welcome to </p>
+            <h1 className="text-4xl font-bold mb-2 text-center">
+              Public Profile of
+            </h1>
+            <Image src={logo} alt='Public Profile Img' width={200}/>
+        </div>
+          <Image src={darkImg} alt='Public Profile Img' width={350} />
+      </div>
       <Form {...form}>
-        <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
+        <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6 mt-6 bg-turquoise 
+            p-4 rounded-md">
           <FormField
             control={form.control}
             name="content"
             render={({ field }) => (
-              <FormItem>
-                <FormLabel>Send Anonymous Message to @{username}</FormLabel>
+              <FormItem className=''>
+                <FormLabel className='text-md'>Send Anonymous Message to 
+                <span className='font-semibold'> @{username}</span></FormLabel>
                 <FormControl>
                   <Textarea
                     placeholder="Write your anonymous message here"
@@ -113,14 +126,15 @@ const SendMessage = () => {
               </FormItem>
             )}
           />
-          <div className="flex justify-center">
+          <div className="flex justify-center ">
             {isLoading ? (
               <Button disabled>
-                <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                <Loader2 className="mr-2 h-4 w-4 animate-spin " />
                 Please wait
               </Button>
             ) : (
-              <Button type="submit" disabled={isLoading || !messageContent}>
+              <Button className=''
+              type="submit" disabled={isLoading || !messageContent}>
                 Send It
               </Button>
             )}
@@ -129,19 +143,15 @@ const SendMessage = () => {
       </Form>
 
       <div className="space-y-4 my-8">
-        <div className="space-y-2">
-          <Button
-            
-            className="my-4"
-            
-          >
-            Suggest Messages
+        <div className="space-y-2 text-gray-600">
+          <Button className="my-4 bg-lighter-green-4 text-gray-600 hover:bg-lighter-green-4">
+            Suggested Messages
           </Button>
           <p>Click on any message below to select it.</p>
         </div>
-        <Card>
+        <Card className='bg-lighter-green-2'>
           <CardHeader>
-            <h3 className="text-xl font-semibold">Messages</h3>
+            <h3 className="text-xl font-semibold text-darker-turquoise">Messages</h3>
           </CardHeader>
           <CardContent className="flex flex-col space-y-4">
             {error ? (
@@ -151,7 +161,7 @@ const SendMessage = () => {
                 <Button
                   key={index}
                   variant="outline"
-                  className="mb-2"
+                  className="mb-2 bg-lighter-green-0" 
                   onClick={() => handleMessageClick(message)}
                 >
                   {message}
@@ -165,9 +175,11 @@ const SendMessage = () => {
       <div className="text-center">
         <div className="mb-4">Get Your Message Board</div>
         <Link href={'/sign-up'}>
-          <Button>Create Your Account</Button>
+          <Button className='bg-darker-turquoise hover:bg-turquoise'
+          >Create Your Account</Button>
         </Link>
       </div>
+    </div>
     </div>
   )
 }

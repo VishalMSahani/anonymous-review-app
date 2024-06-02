@@ -17,14 +17,16 @@ import { useForm } from 'react-hook-form';
 import Link from 'next/link';
 import DashBoardImg from '../../../assets/Analyze-pana.svg'
 import Image from 'next/image';
+import { useRouter } from 'next/navigation';
 
 const Dashboard = () => {
 
-    const [messages, setMessages] = useState<Message[]>([]);
+    const [messages, setMessages] = useState<Message[]>([])
     const [isLoading, setIsLoading] = useState(false)
     const [isSwitchoading, setIsSwitchoading] = useState(false);
     const [buttonText, setButtonText] = useState('Copy');
-    const {toast} = useToast()
+    const {toast} = useToast();
+    const router = useRouter();
 
     const handleMessageDelete = (messageId:string) => {
         setMessages(messages.filter( (message) => message._id ==! messageId))
@@ -90,11 +92,13 @@ const Dashboard = () => {
 
     // fetch initial state from the server
 
-    // useEffect(()=>{
-    //   if (!session || !session.user) return;
-    //     fetchMessages();
-    //     fetchAcceptMessage();
-    // },[session, setValue, toast, fetchMessages, fetchAcceptMessage]);
+    useEffect(()=>{
+      if (!session || !session.user){
+        router.push('/sign-up')
+      };
+        fetchMessages();
+        fetchAcceptMessage();
+    },[session, setValue, toast, fetchMessages, fetchAcceptMessage, router]);
 
     const handleSwitchChange = async() => {
         try {
@@ -120,9 +124,8 @@ const Dashboard = () => {
     } 
     
     if (!session || !session.user) {
-        return 
-          
-    };
+      return <div>Redirecting to sign-up...</div>;
+    }
 
     const {username} = session.user as User;
 

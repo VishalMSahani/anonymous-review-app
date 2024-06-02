@@ -20,6 +20,7 @@ import SignInImg from '../../../assets/Tablet login-pana.svg'
 import Link from 'next/link'
 import { FaRegEye } from "react-icons/fa";
 import { FaRegEyeSlash } from "react-icons/fa";
+import NavBar from '@/components/NavBar'
 
 function SignIn() {
 
@@ -60,7 +61,8 @@ function SignIn() {
     
 
   return (
-
+    <div>
+    <NavBar/>
     <div className='flex justify-center items-center flex-col bg-lighter-green-1 h-full lg:flex-row lg:px-40 px-10'> 
     <div className='my-8 text-center text-gray-700 flex flex-col justify-center items-center w-full lg:mt-8'>
         <p className='text-3xl font-bold my-3 text-darker-turquoise'>Welcome Back!</p>
@@ -127,6 +129,7 @@ function SignIn() {
             </Link>
         </div>
         </div>
+    </div>
     </div>
   )
 }

@@ -124,7 +124,7 @@ const Dashboard = () => {
     } 
     
     if (!session || !session.user) {
-      router.replace('/')
+      // router.replace('/')
       return <div className='h-screen'>Sign-up first </div>;
     }
 

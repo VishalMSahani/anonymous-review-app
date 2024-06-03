@@ -21,7 +21,7 @@ const NavBar = () => {
             </a>
             {
                 session? (
-                    <div className='space-x-4'>
+                    <div className='flex space-x-4'>
                     
                         <Link href='/dashboard'>
                             <Button className='bg-turquoise hover:bg-darker-turquoise text-black'>
@@ -36,7 +36,7 @@ const NavBar = () => {
                     </div>
                 ) : 
                 (
-                  <div className=''>
+                  <div className='flex space-x-2'>
                     <Link href='/sign-in' className='mr-4'>
                         <Button className='bg-transparent border text-black border-turquoise hover:bg-lighter-green-2'>
                             Login

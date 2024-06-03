@@ -135,7 +135,7 @@ const Dashboard = () => {
 
     const copyToClipboard = () => {
       if (!navigator.clipboard) {
-          console.error('Clipboard API not available');
+          // console.error('Clipboard API not available');
           toast({
               title: 'Copy Failed',
               description: 'Clipboard API not available.',

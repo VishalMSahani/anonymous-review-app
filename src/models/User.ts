@@ -24,7 +24,7 @@ export interface User extends Document{
     username: string;
     email:string;
     password:string;
-    messages:Message[] // one to many relationship with message model
+    messages:Message[];// one to many relationship with message model
     verifyCode : string;
     isVerified : boolean;
     expireVerifyCode : Date;

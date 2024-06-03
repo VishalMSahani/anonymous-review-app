@@ -93,9 +93,9 @@ const Dashboard = () => {
     // fetch initial state from the server
 
     useEffect(()=>{
-      if (!session || !session.user){
-        router.push('/sign-up')
-      };
+      // if (!session || !session.user){
+      //   router.push('/sign-up')
+      // };
         fetchMessages();
         fetchAcceptMessage();
     },[session, setValue, toast, fetchMessages, fetchAcceptMessage, router]);
@@ -124,7 +124,8 @@ const Dashboard = () => {
     } 
     
     if (!session || !session.user) {
-      return <div>Redirecting to sign-up...</div>;
+      // router.push('/sign-up')
+      return <div>Sign-up first </div>;
     }
 
     const {username} = session.user as User;

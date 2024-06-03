@@ -7,10 +7,14 @@ import { User } from "next-auth";
 export async function DELETE(request:Request, 
     {params}: {params:{messageid:string}}
 ) {
-    const messageId = params.messageid;
+    const messageId = params.messageid.trim();
+    console.log("Message Id : ", messageId);
+    
     await dbConnect()
     const session = await getServerSession(authOption);
-    const _user:User = session?.user as User;
+    const _user:User = session?.user as User ;
+    console.log(_user);
+    
     if (!session || !_user) {
         return Response.json(
             {
@@ -25,9 +29,11 @@ export async function DELETE(request:Request,
     try {
 
         const updateResult = await UserModel.updateOne(
-            {_id: _user._id},
-            {$pull:{messages:{_id:messageId}}}
-        )
+            {_id: _user?._id},
+            { $pull: {messages:{_id:messageId}}}
+        );
+        console.log(updateResult);
+        
 
         if (updateResult.modifiedCount === 0) {
             return Response.json(

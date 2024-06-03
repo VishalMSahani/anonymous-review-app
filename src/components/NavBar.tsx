@@ -22,11 +22,13 @@ const NavBar = () => {
             {
                 session? (
                     <div className='space-x-4'>
-                    <Link href='/dashboard'>
-                        <Button className='bg-turquoise hover:bg-darker-turquoise text-black'>
-                            Dashboard
-                        </Button>
-                   </Link>
+                    
+                        <Link href='/dashboard'>
+                            <Button className='bg-turquoise hover:bg-darker-turquoise text-black'>
+                                Dashboard
+                            </Button>
+                        </Link>
+                    
                     <Button className='bg-transparent border text-red-500 border-red-500 hover:bg-lighter-green-2'
                     onClick={()=>signOut()}>
                     Logout

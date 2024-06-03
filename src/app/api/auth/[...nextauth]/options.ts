@@ -26,9 +26,9 @@
                         if (!user) {
                             throw new Error("No User found with this email")
                         }
-                        if (!user.isVerified) {
-                            throw new Error("Please verify your email first to login with this email")
-                        }
+                        // if (!user.isVerified) {
+                        //     throw new Error("Please verify your email first to login with this email")
+                        // }
 
                         const isPasswordCorrect = await bcrypt.compare(credentials.password, user.password)
 

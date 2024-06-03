@@ -57,7 +57,7 @@ export async function GET(request:Request) {
         return Response.json(
             {
                 success:false,
-                message:"Internal server error while getting message"
+                message:"No message to display"
             },{status:500}
         ) 
     }

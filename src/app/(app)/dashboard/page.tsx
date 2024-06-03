@@ -77,7 +77,7 @@ const Dashboard = () => {
         } catch (error) {
             const axiosError = error as AxiosError<ApiResponse>;
             toast({
-                title: 'Error',
+                title: 'No Message',
                 description:
                 axiosError.response?.data.message ??
                 'Failed to fetch message settings',
@@ -98,7 +98,7 @@ const Dashboard = () => {
       // };
         fetchMessages();
         fetchAcceptMessage();
-    },[session, setValue, toast, fetchMessages, fetchAcceptMessage, router]);
+    },[session, setValue, toast, fetchMessages, fetchAcceptMessage]);
 
     const handleSwitchChange = async() => {
         try {
@@ -124,8 +124,8 @@ const Dashboard = () => {
     } 
     
     if (!session || !session.user) {
-      // router.push('/sign-up')
-      return <div>Sign-up first </div>;
+      router.replace('/')
+      return <div className='h-screen'>Sign-up first </div>;
     }
 
     const {username} = session.user as User;

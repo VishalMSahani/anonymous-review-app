@@ -16,6 +16,7 @@ import { Form,
         FormMessage } from '@/components/ui/form'
 import { Input } from '@/components/ui/input'
 import { Button } from '@/components/ui/button'
+import Link from 'next/link'
 
 function VerifyAccount() {
 
@@ -57,8 +58,8 @@ function VerifyAccount() {
 
   return (
 
-    <div className=' flex justify-center items-center '> 
-      <div className=''>
+    <div className=' flex justify-center items-center text-center h-screen bg-lighter-green-1'> 
+      <div className=' bg-turquoise p-4 px-8 rounded-md border border-t-gray-400 '>
         <Form {...form}>
 
             <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
@@ -67,9 +68,11 @@ function VerifyAccount() {
                 control={form.control}
                 render={({ field }) => (
                     <FormItem>
-                    <FormLabel>Verification Code</FormLabel>
+                    <FormLabel className='text-lg font-semibold text-center'>Verification Code</FormLabel>
                     <FormControl>
-                        <Input placeholder="Please enter verification code" 
+                        <Input
+                        className='text-center'
+                         placeholder="* * * * * * " 
                         {...field} />
                     </FormControl>
                     <FormMessage />
@@ -83,6 +86,10 @@ function VerifyAccount() {
 
             </form>
         </Form>
+        <div>
+          <p className='text-sm mt-6'>Having trouble in getting <span className='font-semibold'> verification Code? </span></p>
+          <Link className='mt-2 text-blue-800' href={'/sign-in'}>Sign-in</Link>
+        </div>
         </div>
     </div>
   )

@@ -93,7 +93,7 @@ const Page = ()=> {
     }
 
   return (
-    <div className=' flex justify-center items-center flex-col bg-lighter-green-1 h-full lg:flex-row lg:px-40'> 
+    <div className=' flex justify-center items-center flex-col bg-lighter-green-1 h-full lg:flex-row lg:px-40 min-h-screen'> 
       <div className='my-8 text-center text-gray-700 flex flex-col justify-center items-center w-full lg:mt-8'>
         <p className='text-3xl font-bold my-3 text-darker-turquoise'>Join True Feedback Today!</p>
         <p className='text-[25px] font-semibold'>Create Your Account</p>
@@ -151,7 +151,7 @@ const Page = ()=> {
           control={form.control}
           render={({ field }) => (
             <FormItem>
-              <FormLabel>password</FormLabel>
+              <FormLabel>Password</FormLabel>
               <FormControl>
                 <Input type='password' placeholder="password" className='bg-lighter-green-0'
                 {...field}
@@ -167,9 +167,9 @@ const Page = ()=> {
             {
               isSubmetting ? (
                 <>
-                <Loader2 className='m-2 h-4 w-4 animate-spin '/> Pleasr wait
+                <Loader2 className='m-2 h-4 w-4 animate-spin '/> Please wait
                 </>
-              ) : ("Sign-up")
+              ) : ("Create your account")
             }
           </Button>
       </form>

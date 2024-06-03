@@ -21,12 +21,14 @@ import Link from 'next/link'
 import { FaRegEye } from "react-icons/fa";
 import { FaRegEyeSlash } from "react-icons/fa";
 import NavBar from '@/components/NavBar'
+import { Loader2 } from 'lucide-react'
 
 function SignIn() {
 
     const { toast } = useToast()
     const router = useRouter()
     const [isPasswordVisible , setIsPasswordVisible] = useState(false);
+    const [isLoading, setisLoading] = useState(false);
     
     const tooglePAssword = () => {
       setIsPasswordVisible(!isPasswordVisible)
@@ -41,12 +43,14 @@ function SignIn() {
     })
 
     const onSubmit = async(data: z.infer<typeof signInSchema>) => {
+      setisLoading(true)
   
       const result = await signIn('credentials', {
           redirect:false,
           identifier: data.identifier,
           password: data.password
         })
+        setisLoading(false)
       if (result?.error) {
         toast({
           title:'error in sign-in',
@@ -62,8 +66,8 @@ function SignIn() {
 
   return (
     <div>
-    <NavBar/>
-    <div className='flex justify-center items-center flex-col bg-lighter-green-1 h-full lg:flex-row lg:px-40 px-10'> 
+    {/* <NavBar/> */}
+    <div className='flex justify-center items-center flex-col bg-lighter-green-1 h-full lg:flex-row lg:px-40 px-10 min-h-screen'> 
     <div className='my-8 text-center text-gray-700 flex flex-col justify-center items-center w-full lg:mt-8'>
         <p className='text-3xl font-bold my-3 text-darker-turquoise'>Welcome Back!</p>
         <p className='text-[25px] font-semibold'>Log in to Your Account</p>
@@ -79,9 +83,10 @@ function SignIn() {
                 control={form.control}
                 render={({ field }) => (
                     <FormItem>
-                    <FormLabel>Email</FormLabel>
+                    <FormLabel>Email or Username</FormLabel>
                     <FormControl>
-                        <Input type='email' placeholder="Please enter email" 
+                        <Input placeholder="Please enter email / username" 
+                        className='bg-lighter-green-0'
                         {...field} />
                     </FormControl>
                     <FormMessage />
@@ -95,7 +100,8 @@ function SignIn() {
                     <FormItem>
                     <FormLabel>password</FormLabel>
                     <FormControl>
-                        <Input type={isPasswordVisible? "text" : "password"} placeholder="Please enter password" 
+                        <Input type={isPasswordVisible? "text" : "password"} placeholder="Please enter password"
+                        className='bg-lighter-green-0' 
                         {...field} 
                         />
                           
@@ -111,7 +117,13 @@ function SignIn() {
                 />
 
                 <Button type='submit' className='w-full bg-darker-turquoise hover:bg-turquoise'>
-                    Submit
+                {
+                  isLoading ? (
+                    <>
+                    <Loader2 className='m-2 h-4 w-4 animate-spin '/> Please wait
+                    </>
+                  ) : ("Sign-in")
+                }
                 </Button>
 
             </form>
